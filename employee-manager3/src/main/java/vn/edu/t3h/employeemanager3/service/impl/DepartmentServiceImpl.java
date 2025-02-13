@@ -9,7 +9,7 @@ import java.util.List;
 public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
-    public DepartmentServiceImpl(DepartmentDao departmentDao) {
+    public  DepartmentServiceImpl(DepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
     }
 

@@ -143,7 +143,7 @@ public class EmployeeDaoMysqlImpl implements EmployeeDao {
                 employee.setSalary(resultSet.getDouble("salary"));
                 employee.setDepartmentId(resultSet.getInt("department_id"));
                 employee.setHireDate(resultSet.getString("hire_date"));
-
+                System.out.println("get employee success");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
