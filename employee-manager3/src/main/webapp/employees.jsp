@@ -53,7 +53,15 @@
 <body>
 
 <h1>Employee List</h1>
-
+<div id="userInfo" class="user-info">
+    <c:if test="${not empty username}">
+        <span>Xin chao ${username}</span>
+        <a href="/logout">Logout</a>
+    </c:if>
+    <c:if test="${empty username}">
+    <a href="/login">Login</a>
+    </c:if>
+</div>
 <!-- Form tìm kiếm với các trường hiển thị ngang -->
 <form class="search-form" action="employee" method="get">
     <div>

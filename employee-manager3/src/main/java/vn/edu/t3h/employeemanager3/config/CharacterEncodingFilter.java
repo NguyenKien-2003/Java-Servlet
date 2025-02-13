@@ -3,7 +3,11 @@ package vn.edu.t3h.employeemanager3.config;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.t3h.employeemanager3.model.UserModel;
+import vn.edu.t3h.employeemanager3.utils.Constants;
 
 import java.io.IOException;
 import java.util.logging.LogRecord;
@@ -29,6 +33,14 @@ public class CharacterEncodingFilter implements Filter {
         servletRequest.setCharacterEncoding(encoding);
         servletResponse.setCharacterEncoding(encoding);
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        UserModel currentUser = (UserModel) request.getSession().getAttribute(Constants.SESSION_ID_CURRENT_USER);
+        if (currentUser != null){
+            HttpServletResponse response = (HttpServletResponse) servletResponse;
+            Cookie userCookie = new Cookie("username", currentUser.getUsername());
+            userCookie.setMaxAge(60 * 60); // Cookie có hiệu lực trong 1 giờ
+            response.addCookie(userCookie); // Thêm cookie vào response
+            request.setAttribute("username", currentUser.getUsername());
+        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
