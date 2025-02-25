@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nguye
@@ -71,7 +72,14 @@
                     <a class="nav-link" href="#"><i class="bi bi-inboxes"></i> Quản lý đơn hàng</a>
                 </li>
             </ul>
-            <a class="btn btn-primary" href="#" role="button">Đăng nhập</a>
+            <div id="userInfo" class="user-info">
+                <c:if test="${not empty username}">
+                    <span>Xin chao ${username}</span>
+                    <a href="/logout">Logout</a>
+                </c:if>
+                <c:if test="${empty username}">
+                    <a href="/login">Login</a>
+                </c:if>
         </div>
     </div> <!-- container.// -->
 </nav> <!-- navbar-main.// -->
@@ -104,7 +112,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="add-book-yearPublishing" class="form-label">Năm phát hành</label>
-                    <input type="number" class="form-control" id="add-book-yearPublishing" name="add-book-yearPublishing" min="1900" max="2100" required value="<%= isEdit ? product.getYearPublishing() : "1900" %>">
+                    <input type="number" class="form-control" id="add-book-yearPublishing" name="add-book-yearPublishing" min="1900" max="2100" required value="<%= isEdit ? product.getYearPublishing() : "2000" %>">
                 </div>
                 <div class="mb-3">
                     <label for="add-book-category" class="form-label">Thể loại</label>

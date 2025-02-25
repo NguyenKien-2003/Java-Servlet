@@ -194,7 +194,7 @@ public class ProductDaoImpl implements ProductDao {
 
             // Câu lệnh SQL thêm sản phẩm vào bảng product
             String sqlProduct = "INSERT INTO product (name, price, discount, quantity, totalBuy, author, pages, publisher, yearPublishing, description, imageName, shop, createdAt, updatedAt, startsAt, endsAt, created_by) " +
-                    "VALUES (?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, true, now(), now(), now(), null, null)";
+                    "VALUES (?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, true, now(), now(), now(), null, ?)";
 
             psProduct = connection.prepareStatement(sqlProduct, PreparedStatement.RETURN_GENERATED_KEYS);
             psProduct.setString(1, product.getName());
@@ -207,6 +207,7 @@ public class ProductDaoImpl implements ProductDao {
             psProduct.setInt(8, product.getYearPublishing());
             psProduct.setString(9, product.getDescription());
             psProduct.setString(10, product.getImageName());
+            psProduct.setString(11,product.getCreatedBy());
 
             psProduct.executeUpdate();
 

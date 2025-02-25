@@ -15,7 +15,7 @@ import vn.edu.t3h.bookshopmanager.service.impl.UserServiceImpl;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserManager", value = "/user-manager")
+@WebServlet(name = "UserManager", value = "/admin/user-manager")
 public class UserManagerServlet extends HttpServlet {
     private UserService userService;
     @Override
@@ -28,6 +28,7 @@ public class UserManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String role = req.getParameter("role");
+        System.out.println("role nhan dc:" + role);
         List<User> users = userService.getUsersByRole(role);
         req.setAttribute("users", users);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/admin/user-manager.jsp");

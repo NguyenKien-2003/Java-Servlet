@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nguye
@@ -76,7 +77,14 @@
                     <a class="nav-link" href="#"><i class="bi bi-inboxes"></i> Quản lý đơn hàng</a>
                 </li>
             </ul>
-            <a class="btn btn-primary" href="#" role="button">Đăng nhập</a>
+            <div id="userInfo" class="user-info">
+                <c:if test="${not empty username}">
+                    <span>Xin chao ${username}</span>
+                    <a href="/logout">Logout</a>
+                </c:if>
+                <c:if test="${empty username}">
+                    <a href="/login">Login</a>
+                </c:if>
         </div>
     </div> <!-- container.// -->
 </nav> <!-- navbar-main.// -->

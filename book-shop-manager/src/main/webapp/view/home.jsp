@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="vn.edu.t3h.bookshopmanager.model.Category" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.t3h.bookshopmanager.model.Product" %>
 <%--
   Created by IntelliJ IDEA.
   User: nguye
@@ -113,8 +115,14 @@
                     <a class="nav-link" href="#">Khuyến mãi</a>
                 </li>
             </ul>
-            <a class="btn btn-light me-2" href="#" role="button">Đăng ký</a>
-            <a class="btn btn-primary" href="#" role="button">Đăng nhập</a>
+            <div id="userInfo" class="user-info">
+                <c:if test="${not empty username}">
+                    <span>Xin chao ${username}</span>
+                    <a href="/logout">Logout</a>
+                </c:if>
+                <c:if test="${empty username}">
+                    <a href="/login">Login</a>
+                </c:if>
         </div>
     </div> <!-- container.// -->
 </nav> <!-- navbar-main.// -->
@@ -181,162 +189,41 @@
             <a class="btn btn-secondary" href="#" role="button" style="height: fit-content;">Xem tất cả</a>
         </header> <!-- section-heading.     // -->
         <div class="row item-grid" id="productHome">
-<%--            <%  List<Product> products = (List<Product>) request.getAttribute("products");--%>
-<%--                if (products != null && !products.isEmpty()) {--%>
-<%--                    for (Product product : products) {--%>
-<%--            %>--%>
-<%--            <div class="col-lg-4 col-md-6">--%>
+            <%  List<Product> products = (List<Product>) request.getAttribute("products");
+                if (products != null && !products.isEmpty()) {
+                    for (Product product : products) {
+            %>
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 mb-4">
+                    <a href="#" class="img-wrap text-center">
+                        <img class="img-fluid" src="img/200px.png">
+                    </a>
+                    <figcaption class="info-wrap mt-2">
+                        <a href="" class="title"><%=product.getName()%></a>
+                        <div class="price mt-1 fw-bold"><%=product.getPrice()%>₫</div>
+                    </figcaption>
+                </div>
+            </div>
+            <%
+                }
+            } else {
+            %>
+            <p>Không có sản phẩm nào trong danh mục này.</p>
+            <%
+                }
+            %>
+<%--        </div> <!-- col.// -->--%>
+<%--            <div class="col-lg-3 col-md-6">--%>
 <%--                <div class="card p-3 mb-4">--%>
 <%--                    <a href="#" class="img-wrap text-center">--%>
 <%--                        <img class="img-fluid" src="img/200px.png">--%>
 <%--                    </a>--%>
 <%--                    <figcaption class="info-wrap mt-2">--%>
-<%--                        <a href="" class="title"><%=product.getName()%></a>--%>
-<%--                        <div class="price mt-1 fw-bold"><%=product.getPrice()%>₫</div>--%>
+<%--                        <a href="#" class="title">Tên một sản phẩm</a>--%>
+<%--                        <div class="price mt-1 fw-bold">450.000₫</div>--%>
 <%--                    </figcaption>--%>
 <%--                </div>--%>
-<%--            </div>--%>
-<%--            <%--%>
-<%--                }--%>
-<%--            } else {--%>
-<%--            %>--%>
-<%--            <p>Không có sản phẩm nào trong danh mục này.</p>--%>
-<%--            <%--%>
-<%--                }--%>
-<%--            %>--%>
-<%--        </div> <!-- col.// -->--%>
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-3 mb-4">
-                    <a href="#" class="img-wrap text-center">
-                        <img class="img-fluid" src="img/200px.png">
-                    </a>
-                    <figcaption class="info-wrap mt-2">
-                        <a href="#" class="title">Tên một sản phẩm</a>
-                        <div class="price mt-1 fw-bold">450.000₫</div>
-                    </figcaption>
-                </div>
-            </div> <!-- col.// -->
+<%--            </div> <!-- col.// -->--%>
         </div> <!-- row.// -->
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->

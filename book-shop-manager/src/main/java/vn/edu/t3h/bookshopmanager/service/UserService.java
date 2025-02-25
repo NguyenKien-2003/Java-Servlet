@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
         String login(String username, String password, HttpServletRequest req);
-
+        String getRoleByUsername(String username);
         List<User> getUsersByRole(String role);
         int addUser(User user);
         User getUserById(int id);

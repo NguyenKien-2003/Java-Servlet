@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String getRoleByUsername(String username){
+        UserDao userDao = new UserDaoImpl();
+        return userDao.getRoleByUserName(username);
+    }
+
+    @Override
     public int addUser(User user) {
         UserDao userDao = new UserDaoImpl();
         return userDao.addUser(user);

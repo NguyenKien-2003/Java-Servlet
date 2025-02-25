@@ -22,7 +22,6 @@ public class   AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         userService = new UserServiceImpl(new UserDaoImpl());
-
         // Định nghĩa vai trò cho các đường dẫn
         roleMapping.put("/admin", Constants.ROLE.ADMIN.name());
         roleMapping.put("/employee", Constants.ROLE.EMPLOYEE.name());

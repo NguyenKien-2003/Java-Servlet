@@ -124,8 +124,8 @@ public class UserDaoImpl implements UserDao {
 
     public void setUserConditionFilter(String role, PreparedStatement statement) throws SQLException {
         if (role != null) {
-            statement.setString(1, "%" + role + "%");
-            statement.setString(2, "%" + role + "%");
+            statement.setString(1, role );
+            statement.setString(2, role);
         } else {
             statement.setNull(1, Types.VARCHAR);
             statement.setNull(2, Types.VARCHAR);
@@ -220,5 +220,23 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         return user;
+    }
+
+    @Override
+    public String getRoleByUserName(String username) {
+        String role = null;
+        String sql = "SELECT role FROM user WHERE username = ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+         preparedStatement.setString(1,username);
+         try (ResultSet resultSet = preparedStatement.executeQuery()) {
+             if (resultSet.next()) {
+                 role = resultSet.getString("role");
+             }
+         }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return role;
     }
 }

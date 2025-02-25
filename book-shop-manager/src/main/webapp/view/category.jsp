@@ -18,11 +18,14 @@
 <%--    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon">--%>
 
     <!-- Bootstrap v5.0.1 -->
-    <link href="../css/bootstrap.css" type="text/css" rel="stylesheet">
-    <script src="../js/bootstrap.bundle.js" type="text/javascript"></script>
+<%--    <link href="../css/bootstrap.css" type="text/css" rel="stylesheet">--%>
+<%--    <script src="../js/bootstrap.bundle.js" type="text/javascript"></script>--%>
 
-    <!-- Bootstrap Icons v1.5.0 -->
-    <link href="../css/bootstrap-icons.css" type="text/css" rel="stylesheet">
+<%--    <!-- Bootstrap Icons v1.5.0 -->--%>
+<%--    <link href="../css/bootstrap-icons.css" type="text/css" rel="stylesheet">--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 
     <!-- Custom Styles -->
     <link href="../css/styles.css" type="text/css" rel="stylesheet">

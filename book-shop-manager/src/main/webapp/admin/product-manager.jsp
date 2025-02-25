@@ -29,6 +29,46 @@
 
     <!-- Custom Styles -->
     <link href="../css/styles.css" type="text/css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin:10px 8%;
+        }
+        .search-form label {
+            font-weight: bold;
+        }
+        .search-form input[type="text"],
+        .search-form input[type="date"] {
+            padding: 5px;
+            width: 200px;
+        }
+        .search-form input[type="submit"] {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .search-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <header class="section-header">
@@ -64,7 +104,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="bi bi-people"></i> Quản lý người dùng</a>
+                    <a class="nav-link" href="/admin/user-manager"><i class="bi bi-people"></i> Quản lý người dùng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"><i class="bi bi-tags"></i> Quản lý thể loại</a>
@@ -135,10 +175,10 @@
         <label for="yearPublishing">Year of Publishing:</label>
         <input type="number" id="yearPublishing" name="yearPublishing" value="${param.yearPublishing}" placeholder="Enter Year"/>
     </div>
-
     <div>
         <input type="submit" value="Search"/>
     </div>
+
 </form>
 <section class="section-content">
     <div class="container">

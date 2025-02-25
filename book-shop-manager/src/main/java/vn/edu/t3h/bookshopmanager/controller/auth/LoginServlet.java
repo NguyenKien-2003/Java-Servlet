@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getRequestURI().contains("/logout")){
             //deleted session when logout
-            req.getSession().removeAttribute(Constants.SESSION_ID_CURRENT_USER);
+            req.getSession().invalidate();
             resp.sendRedirect("/");
 
         }else {
