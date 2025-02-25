@@ -15,7 +15,7 @@ public class ProductDaoImpl implements ProductDao {
             "    product_category on product.id = product_category.productId inner join\n" +
             "    category on product_category.categoryId = category.id";
 
-    public static final String DELETE_PRODUCT_BY_ID="DELETE FROM product WHERE id = ?;";
+    public static final String DELETE_PRODUCT_BY_ID = "DELETE FROM product WHERE id = ?;";
     public static final String UPDATE_PRODUCT = "UPDATE product set name = ?, price=?, discount=?,quantity=?,author=?,pages=?,publisher=?,yearPublishing=?,description=?,imageName=? ,updatedAt=now() WHERE id=?";
     public static final String UPDATE_PRODUCT_CATEGORY = "UPDATE product_category set categoryId = ? where productId = ?";
     public static final String GET_PRODUCT_BY_USER = "SELECT product.*, category.name AS category_name, category.id AS category_id FROM product INNER JOIN product_category ON product.id = product_category.productId INNER JOIN category ON product_category.categoryId = category.id WHERE product.created_by=?";
@@ -23,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> getAllProduct() {
         List<Product> productsResult = new ArrayList<>();
-        try{
+        try {
             Connection connection = DatabaseConnection.getConnection();
 
             PreparedStatement statement = connection.prepareStatement(GET_ALL_PRODUCTS_AND_CATEGORY);
@@ -67,7 +67,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> getProductByUser(String user) {
         List<Product> productsResult = new ArrayList<>();
-        try{
+        try {
             Connection connection = DatabaseConnection.getConnection();
 
             PreparedStatement statement = connection.prepareStatement(GET_PRODUCT_BY_USER);
@@ -115,15 +115,15 @@ public class ProductDaoImpl implements ProductDao {
         int rowsAffected = 0;
         Connection connection = null;
 
-        try{
+        try {
             connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PRODUCT_BY_ID);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            if( connection != null){
+        } finally {
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
@@ -207,7 +207,7 @@ public class ProductDaoImpl implements ProductDao {
             psProduct.setInt(8, product.getYearPublishing());
             psProduct.setString(9, product.getDescription());
             psProduct.setString(10, product.getImageName());
-            psProduct.setString(11,product.getCreatedBy());
+            psProduct.setString(11, product.getCreatedBy());
 
             psProduct.executeUpdate();
 
@@ -240,10 +240,26 @@ public class ProductDaoImpl implements ProductDao {
             e.printStackTrace();
         } finally {
             // Đóng tài nguyên
-            try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            try { if (psProduct != null) psProduct.close(); } catch (SQLException e) { e.printStackTrace(); }
-            try { if (psCategory != null) psCategory.close(); } catch (SQLException e) { e.printStackTrace(); }
-            try { if (connection != null) connection.close(); } catch (SQLException e) { e.printStackTrace(); }
+            try {
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (psProduct != null) psProduct.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (psCategory != null) psCategory.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return rowsAffected;
@@ -255,7 +271,7 @@ public class ProductDaoImpl implements ProductDao {
         Connection connection = null;
         PreparedStatement psProduct = null;
         PreparedStatement psCategory = null;
-        try{
+        try {
             connection = DatabaseConnection.getConnection();
             connection.setAutoCommit(false);
             psProduct = connection.prepareStatement(UPDATE_PRODUCT);
@@ -283,13 +299,13 @@ public class ProductDaoImpl implements ProductDao {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             if (connection != null) {
-               try{
-                   connection.close();
-               } catch (SQLException e) {
-                   throw new RuntimeException(e);
-               }
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
 
@@ -376,7 +392,6 @@ public class ProductDaoImpl implements ProductDao {
             statement.setNull(10, Types.INTEGER);
         }
     }
-
 
 
 }

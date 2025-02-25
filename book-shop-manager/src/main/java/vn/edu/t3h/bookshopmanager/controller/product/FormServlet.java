@@ -33,7 +33,7 @@ public class FormServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String productId = req.getParameter("id");  // Lấy id sản phẩm từ request
+        String productId = req.getParameter("id");
         Product product = null;
         ProductService productService;
 
@@ -51,10 +51,7 @@ public class FormServlet extends HttpServlet {
             }
         }
 
-        // Lấy danh mục
         List<Category> categories = categoryService.getAllCategory();
-
-        // Đặt product và categories vào request để truyền sang JSP
         req.setAttribute("product", product);
         req.setAttribute("categories", categories);
 

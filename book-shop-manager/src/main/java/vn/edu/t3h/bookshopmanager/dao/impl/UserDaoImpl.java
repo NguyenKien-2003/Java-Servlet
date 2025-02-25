@@ -41,7 +41,6 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    // Phương thức tìm người dùng theo tên đăng nhập và mật khẩu
     public User findUserByUserNameAndPassword(String username, String password) {
         User user = null;
         String sql = "SELECT u.id, u.username, u.password, u.fullname,u.email,u.gender, u.phoneNumber,u.address, u.role FROM user u WHERE u.username = ? AND u.password = ?";
@@ -54,7 +53,6 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(2, password); // Set mật khẩu
             // tuong tu connection
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                // Lấy dữ liệu từ kết quả truy vấn và gán vào đối tượng UserModel
                 if (resultSet.next()) {
                     Integer id = resultSet.getInt("id");
                     String fullName = resultSet.getString("fullname");
@@ -64,7 +62,6 @@ public class UserDaoImpl implements UserDao {
                     String address = resultSet.getString("address");
                     String role = resultSet.getString("role");
 
-                    // Tạo đối tượng UserModel từ dữ liệu truy vấn
                     user = new User();
                     user.setId(id);
                     user.setUsername(username);
@@ -201,7 +198,6 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(1, id); // Set tên đăng nhập
             // tuong tu connection
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                // Lấy dữ liệu từ kết quả truy vấn và gán vào đối tượng UserModel
                 if (resultSet.next()) {
                     user.setId(resultSet.getInt("id"));
                     user.setUsername(resultSet.getString("username"));
