@@ -9,7 +9,7 @@
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <!--      chỉ định file config cho dispatcher-servlet, là
+      <!--      chỉ định file vn.edu.t3h.config cho dispatcher-servlet, là
       file dispatcher-servlet.xml vừa được tạo ra-->
       <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
     </init-param>
