@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="bookshop-mvc">
+    <output-path>$PROJECT_DIR$/out/artifacts/bookshop_mvc</output-path>
+    <root id="root">
+      <element id="archive" name="bookshop_mvc.jar">
+        <element id="module-output" name="bookshop-mvc" />
+      </element>
+    </root>
+  </artifact>
+</component>
