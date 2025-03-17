@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserRepository {
     List<UserDTO> getAllUsers();
     UserDTO getUserById(int id);
-    public List<UserDTO> findUsers(String keyword);
+    List<UserDTO> findUsers(String keyword);
     void deleteUser(int id);
     void addUser(UserDTO userDTO);
     void updateUser(UserDTO userDTO);

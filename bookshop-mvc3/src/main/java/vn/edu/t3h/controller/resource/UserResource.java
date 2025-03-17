@@ -46,7 +46,7 @@ public class UserResource {
         if (user != null) {
             userService.updateUser(userDTO);
             return ResponseEntity.ok("da update user" + user);
-        }else {
+        } else {
             return ResponseEntity.ok("User khong ton tai");
         }
     }
@@ -56,7 +56,6 @@ public class UserResource {
         userService.deleteUserById(id);
         return ResponseEntity.ok("Xoa user thanh cong");
     }
-
 
 
 }

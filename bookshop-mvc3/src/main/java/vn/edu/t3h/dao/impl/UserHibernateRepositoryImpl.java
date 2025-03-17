@@ -5,10 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import vn.edu.t3h.dao.UserRepository;
 import vn.edu.t3h.entity.IdentityCard;
-import vn.edu.t3h.entity.ProductEntity;
 import vn.edu.t3h.entity.RoleEntity;
 import vn.edu.t3h.entity.UserEntity;
 import vn.edu.t3h.model.UserDTO;
@@ -50,7 +48,7 @@ public class UserHibernateRepositoryImpl implements UserRepository {
     @Override
     public List<UserDTO> findUsers(String keyword) {
         List<UserEntity> users;
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             String hql = "FROM UserEntity u WHERE u.username LIKE :keyword OR u.identityCard.fullName LIKE :keyword";
             Query<UserEntity> query = session.createQuery(hql, UserEntity.class);
             query.setParameter("keyword", "%" + keyword + "%");
@@ -87,9 +85,9 @@ public class UserHibernateRepositoryImpl implements UserRepository {
         user.setIdentityCard(identityCard);
 
         Set<RoleEntity> roles = new HashSet<>();
-        if(userDTO.getRoles() != null) {
+        if (userDTO.getRoles() != null) {
             for (String roleName : userDTO.getRoles()) {
-                RoleEntity role = getRoleByName(session,roleName);
+                RoleEntity role = getRoleByName(session, roleName);
                 if (role != null) {
                     roles.add(role);
                 } else {
@@ -104,7 +102,6 @@ public class UserHibernateRepositoryImpl implements UserRepository {
     }
 
 
-
     @Override
     public void updateUser(UserDTO userDTO) {
         Session session = sessionFactory.openSession();
@@ -115,7 +112,7 @@ public class UserHibernateRepositoryImpl implements UserRepository {
             user.setPassword(userDTO.getPassword());
 
             IdentityCard identityCard = user.getIdentityCard();
-            if(identityCard == null) {
+            if (identityCard == null) {
                 identityCard = new IdentityCard();
             }
             identityCard.setAddress(userDTO.getAddress());
@@ -125,12 +122,12 @@ public class UserHibernateRepositoryImpl implements UserRepository {
             user.setIdentityCard(identityCard);
 
             Set<RoleEntity> roles = new HashSet<>();
-            if(userDTO.getRoles() != null) {
+            if (userDTO.getRoles() != null) {
                 for (String roleName : userDTO.getRoles()) {
                     RoleEntity role = getRoleByName(session, roleName);
                     if (role != null) {
                         roles.add(role);
-                    }else{
+                    } else {
                         System.out.println("Role không tồn tại: " + roleName);
                     }
                 }
@@ -145,9 +142,9 @@ public class UserHibernateRepositoryImpl implements UserRepository {
 
     @Override
     public RoleEntity getRoleByName(Session session, String roleName) {
-            Query<RoleEntity> query = session.createQuery("FROM RoleEntity r WHERE r.roleName = :roleName", RoleEntity.class);
-            query.setParameter("roleName", roleName);
-            System.out.println(roleName);
-            return query.uniqueResult();
+        Query<RoleEntity> query = session.createQuery("FROM RoleEntity r WHERE r.roleName = :roleName", RoleEntity.class);
+        query.setParameter("roleName", roleName);
+        System.out.println(roleName);
+        return query.uniqueResult();
     }
 }
