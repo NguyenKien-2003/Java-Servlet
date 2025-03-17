@@ -9,11 +9,12 @@ public interface ProductService {
 
 //    List<ProductDto> getProducts();
 //    ProductDto getProductById(int id);
-//    void addProduct(ProductDto product);
-//    void updateProduct(ProductDto product);
-//    void deleteProduct(int id);
+
+//
+void deleteProduct(int id);
 List<ProductEntity> getProducts();
 ProductEntity getProductById(int id);
-
+void addProduct(ProductDTO product);
+void updateProduct(ProductDTO product);
 public List<ProductDTO> findByCondition(Double price, String bookTitle,String publisher,String categoryName);
 }

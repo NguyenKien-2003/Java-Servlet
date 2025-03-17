@@ -47,6 +47,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
+    public void deleteProduct(int id) {
+        productRepository.deleteProduct(id);
+    }
+
+    @Override
     public List<ProductEntity> getProducts() {
         return productRepository.findAll();
     }
@@ -54,6 +59,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductEntity getProductById(int id) {
         return productRepository.getProductById(id);
+    }
+
+    @Override
+    public void addProduct(ProductDTO product) {
+        productRepository.addProduct(product);
+    }
+
+    @Override
+    public void updateProduct(ProductDTO product) {
+        productRepository.updateProduct(product);
     }
 
     @Override
@@ -69,4 +84,6 @@ public class ProductServiceImpl implements ProductService {
         }).collect(Collectors.toList());
         return productDTOS;
     }
+
+
 }

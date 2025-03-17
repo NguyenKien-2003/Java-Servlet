@@ -2,11 +2,13 @@ package vn.edu.t3h.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import vn.edu.t3h.dao.ProductRepository;
 import vn.edu.t3h.entity.ProductEntity;
+import vn.edu.t3h.model.ProductDTO;
 
 import java.util.List;
 
@@ -89,4 +91,69 @@ public class ProductHibernateRepositoryImpl implements ProductRepository {
         session.close();
         return productEntities;
     }
+
+    @Override
+    public void deleteProduct(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "DELETE FROM ProductEntity p WHERE p.id = :id";
+            Query query = session.createQuery(hql);
+            query.setParameter("id", id);
+            int result = query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw e;
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public void addProduct(ProductDTO productDTO) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setAuthor(productDTO.getAuthor());
+        productEntity.setBookTitle(productDTO.getBookTitle());
+        productEntity.setDescription(productDTO.getDescription());
+        productEntity.setDiscount(productDTO.getDiscount());
+        productEntity.setGenre(productDTO.getGenre());
+        productEntity.setImage(productDTO.getImage());
+        productEntity.setPageCount(productDTO.getPageCount());
+        productEntity.setPrice(productDTO.getPrice());
+        productEntity.setPublicationYear(productDTO.getPublicationYear());
+        productEntity.setPublisher(productDTO.getPublisher());
+        productEntity.setStockQuantity(productDTO.getStockQuantity());
+        session.save(productEntity);
+        transaction.commit();
+        session.close();
+    }
+
+    @Override
+    public void updateProduct(ProductDTO product) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        ProductEntity productEntity =session.get(ProductEntity.class, product.getId());
+        if(productEntity!=null){
+            productEntity.setAuthor(product.getAuthor());
+            productEntity.setBookTitle(product.getBookTitle());
+            productEntity.setDescription(product.getDescription());
+            productEntity.setDiscount(product.getDiscount());
+            productEntity.setGenre(product.getGenre());
+            productEntity.setImage(product.getImage());
+            productEntity.setPageCount(product.getPageCount());
+            productEntity.setPrice(product.getPrice());
+            productEntity.setPublicationYear(product.getPublicationYear());
+            productEntity.setPublisher(product.getPublisher());
+            productEntity.setStockQuantity(product.getStockQuantity());
+            session.update(productEntity);
+            transaction.commit();
+            session.close();
+        }
+        System.out.println("khong tim thay san pham");
+    }
+
+
 }

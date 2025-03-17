@@ -39,6 +39,7 @@ public class ProductResource {
     }
 
 
+
     @GetMapping("/search")
     public ResponseEntity<List<ProductDTO>> search(@RequestParam(required = false,name = "price") Double price,
                                                    @RequestParam(required = false,name = "bookTitle") String bookTitle,
@@ -46,6 +47,30 @@ public class ProductResource {
                                                    @RequestParam(required = false,name = "categoryName") String categoryName) {
         List<ProductDTO> productEntities = productService.findByCondition(price, bookTitle, publisher, categoryName);
         return ResponseEntity.ok(productEntities);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") int id) {
+        productService.deleteProduct(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> addProduct(@RequestBody ProductDTO productDTO) {
+        productService.addProduct(productDTO);
+        return ResponseEntity.ok("them sp thanh cong");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable("id") int id, @RequestBody ProductDTO productDTO) {
+        ProductEntity productEntity = productService.getProductById(id);
+        if (productEntity != null) {
+            productDTO.setId(id);
+            productService.updateProduct(productDTO);
+            return ResponseEntity.ok("sua sp thanh cong");
+        }
+        else {
+            return ResponseEntity.ok("san pham khong ton tai");
+        }
     }
 
 }

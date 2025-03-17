@@ -78,4 +78,6 @@ public class UserEntity {
         this.identityCard = identityCard;
         identityCard.setUser(this);
     }
+
+
 }
